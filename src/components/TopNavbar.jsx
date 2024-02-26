@@ -25,6 +25,7 @@ const TopNavbar = () => {
         <Navbar.Link className="cursor-pointer" onClick={()=> navigate('/')}>Home</Navbar.Link>
         <Navbar.Link className="cursor-pointer" onClick={()=> navigate('/customer')}>CustomerForm</Navbar.Link>
         <Navbar.Link className="cursor-pointer" onClick={()=> navigate('/Links')}>LinkForm</Navbar.Link>
+        <Navbar.Link className="cursor-pointer" onClick={()=> navigate('/LinkList')}>LinkList</Navbar.Link>
         <Navbar.Link>About</Navbar.Link>
         <Navbar.Link>Contact</Navbar.Link>
         <DarkThemeToggle />

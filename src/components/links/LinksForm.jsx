@@ -1,6 +1,6 @@
 import { Button, Label, Radio, TextInput } from "flowbite-react";
 import { useForm } from "react-hook-form";
-import { fireStoreDb } from "../firebase/firebaseConfig";
+import { fireStoreDb } from "../../firebase/firebaseConfig";
 import {
   collection,
   addDoc,

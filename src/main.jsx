@@ -6,9 +6,10 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import { Flowbite } from 'flowbite-react'
 
-import CustomerForm from './components/CustomerForm.jsx'
-import LinksForm from './components/LinksForm.jsx'
 import Body from './components/Body';
+import CustomerForm from './components/CustomerForm'
+import LinksForm from './components/links/LinksForm'
+import LinkList from './components/links/linkList'
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/links',
         element: <LinksForm />
+      },
+      {
+        path: '/linkList',
+        element: <LinkList />
       },
     ]
   },
