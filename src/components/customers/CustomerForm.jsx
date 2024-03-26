@@ -87,5 +87,3 @@ const CustomerForm = () => {
 };
 
 export default CustomerForm;
-
-("use client");
