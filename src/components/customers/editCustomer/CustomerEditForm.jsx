@@ -1,45 +1,35 @@
 import { Button, Label, TextInput } from "flowbite-react";
 import { useForm } from "react-hook-form";
-import { fireStoreDb } from "../../../firebase/firebaseConfig";
-import {
-	collection,
-	addDoc,
-} from "firebase/firestore";
-import { useLoaderData, useParams } from "react-router-dom";
+import { updateDoc } from "firebase/firestore";
+import { useLoaderData } from "react-router-dom";
 
 const CustomerEditForm = () => {
-    const params = useParams();
-    const customerId = parseInt(params.customerId)
-    const customer = useLoaderData()
+    const data = useLoaderData()
+	const { customerName, customerContactName } = data.data();
+    const customerDocRef = data.ref
+    
 	const {
 		register,
 		handleSubmit,
 		formState: { isSubmitting },
 	} = useForm({
-        defaultValues:{
-            customerId:customerId,
-            customerName: customer.customerName,
-            customerContactName: customer.customerContactName
-        },
-        // defaultValues : {...customer},
-        // defaultValues:{
-        //     // customerId:1,
-        //     customerName: "hello",
-        //     customerContactName: "world"
-        // }
-    });
+		defaultValues: {
+			editedCustomerName: customerName,
+			editedCustomerContactName: customerContactName,
+		},
+	});
 
 	const customerEditFormSubmitHandler = async (customerData) => {
-		const { customerName, customerContactName } = customerData;
+		const { editedCustomerName, editedCustomerContactName } = customerData;
 		try {
-			const CustomerRef = await addDoc(collection(fireStoreDb, "customers"), {
-				customerId: customerId,
-				customerName: customerName,
-				customerContactName: customerContactName,
+			// Update the document with the new data
+			await updateDoc(customerDocRef, {
+				customerName: editedCustomerName,
+				customerContactName: editedCustomerContactName,
 			});
-			console.log("Document written with ID: ", CustomerRef.id);
+			console.log("Document successfully updated!");
 		} catch (e) {
-			console.error("Error adding document: ", e);
+			console.error("Error updating document: ", e);
 		}
 	};
 
@@ -54,7 +44,7 @@ const CustomerEditForm = () => {
 						<Label htmlFor="customerName" value="Customer" />
 					</div>
 					<TextInput
-						{...register("customerName")}
+						{...register("editedCustomerName")}
 						id="customerName"
 						type="text"
 						placeholder="Sify"
@@ -66,7 +56,7 @@ const CustomerEditForm = () => {
 						<Label htmlFor="customerContactName" value="Contact Name" />
 					</div>
 					<TextInput
-						{...register("customerContactName")}
+						{...register("editedCustomerContactName")}
 						id="customerContactName"
 						type="text"
 						placeholder="John Doe"
@@ -82,4 +72,3 @@ const CustomerEditForm = () => {
 };
 
 export default CustomerEditForm;
-

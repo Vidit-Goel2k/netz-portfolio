@@ -8,7 +8,7 @@ const getCustomer = async (customerId) => {
     );
     const querySnapshot = await getDocs(customerQuery);
 
-    const customerRecieved = querySnapshot.docs[0].data();
+    const customerRecieved = querySnapshot.docs[0];
     return customerRecieved;
 };
 
