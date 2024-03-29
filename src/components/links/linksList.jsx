@@ -1,22 +1,26 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { fireStoreDb } from "../../firebase/firebaseConfig"; // Import your Firestore config
 
-import { Table } from "flowbite-react"; // Import Container and Card
+import { Table, Button } from "flowbite-react"; // Import Container and Card
 import LinkItem from "./LinkItem";
+import { useNavigate } from "react-router-dom";
 
-const LinkList = () => {
+const LinksList = () => {
   const [links, setLinks] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchLinks = async () => {
       try {
         const linksCollection = collection(fireStoreDb, "links");
-        const linksSnapshot = await getDocs(linksCollection);
+        const linksQuery = query(linksCollection, orderBy("linkId", "desc"))
+        const linksSnapshot = await getDocs(linksQuery);
         
         const linksData = linksSnapshot.docs.map((doc) => doc.data());
-        linksData.sort((a, b) => a.linkId - b.linkId);
+        // linksData.sort((a, b) => a.linkId - b.linkId);
 
         setLinks(linksData);
         setLoading(false);
@@ -33,7 +37,7 @@ const LinkList = () => {
   const {Head, HeadCell, Body, Row, Cell} = Table;
 
   return (
-    <div className="overflow-x-auto">
+    <div className="flex flex-col overflow-x-auto">
       <Table striped hoverable>
         <Head>
           <HeadCell>linkId</HeadCell>
@@ -58,8 +62,15 @@ const LinkList = () => {
           )}
         </Body>
       </Table>
+      <Button
+        size="lg"
+        className="self-end m-4 text-6xl size-12"
+        onClick={()=>{
+          navigate('/addLink')
+        }}
+      >+</Button>
     </div>
   );
 };
 
-export default LinkList;
+export default LinksList;

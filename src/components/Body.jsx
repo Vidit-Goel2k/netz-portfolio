@@ -7,9 +7,11 @@ const Body = () => {
   return (
     <>
       <div className="flex flex-col items-center justify-center h-screen gap-4">
-        <Button onClick={() => navigate("/customer")}>Customer Form</Button>
-        <Button onClick={() => navigate("/links")}>Links Form</Button>
-        <Button onClick={() => navigate("/teamsForm")}>Teams Form</Button>
+        <Button onClick={() => navigate("/addCustomer")}>Add Customer</Button>
+        <Button onClick={() => navigate("/addLink")}>Add Links</Button>
+        <Button onClick={() => navigate("/addTeam")}>Add Teams</Button>
+        <Button onClick={() => navigate("/addEmployee")}>Add Employee</Button>
+        <Button onClick={() => navigate("/addItem")}>Add Items</Button>
       </div>
     </>
   );

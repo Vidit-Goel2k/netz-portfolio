@@ -4,6 +4,8 @@ const LinkItem = ({ link }) => {
   
   const { linkId, customerId, customerName, from, to, customerLink, length, status, core } = link
 
+  // console.log(customerLink)
+
   return (
     <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
       <Table.Cell className="font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -13,7 +15,7 @@ const LinkItem = ({ link }) => {
       <Table.Cell>{customerName}</Table.Cell>
       <Table.Cell>{from}</Table.Cell>
       <Table.Cell>{to}</Table.Cell>
-      <Table.Cell>{customerLink}</Table.Cell>
+      <Table.Cell>{customerLink === true ? "Yes" : "No"}</Table.Cell>
       <Table.Cell>{length}</Table.Cell>
       <Table.Cell>{status}</Table.Cell>
       <Table.Cell>{core}</Table.Cell>

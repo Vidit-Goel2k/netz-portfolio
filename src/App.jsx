@@ -3,7 +3,7 @@ import TopNavbar from './components/TopNavbar';
 
 const App = () => {
   return (
-    <div className=' bg-blue-950'>
+    <div className='dark:bg-blue-900'>
       <TopNavbar />
       <Outlet />
     </div>
